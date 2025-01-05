@@ -57,6 +57,7 @@ jobs:
       - name: Run tests in python_only package
         run: |
           cd python_only
+          pip install --upgrade pip
           pip install -r requirements/main.txt -r requirements/dev.txt -r requirements/test.txt
           python scripts/test.py
 
@@ -72,6 +73,8 @@ jobs:
           cd both
           bun install
           sudo apt update && sudo apt install -y xvfb libasound2t64 libgbm1 libgtk-3-0t64 libnss3 lcov > /dev/null 2>&1 || true
+          pip install --upgrade pip
+          pip install -r requirements/main.txt -r requirements/dev.txt -r requirements/test.txt
           xvfb-run -a bun run test
 
       - name: Run tests in python_and_ts on windows-latest
@@ -79,6 +82,8 @@ jobs:
         run: |
           cd both
           bun install
+          pip install --upgrade pip
+          pip install -r requirements/main.txt -r requirements/dev.txt -r requirements/test.txt
           bun run test
 
       - name: Run tests in python_and_ts on macos-latest
@@ -86,4 +91,6 @@ jobs:
         run: |
           cd both
           bun install
+          pip install --upgrade pip
+          pip install -r requirements/main.txt -r requirements/dev.txt -r requirements/test.txt
           bun run test
