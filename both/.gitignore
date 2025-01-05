@@ -3,6 +3,7 @@
 **/build/
 **/dist/
 **/site/
+**/out/
 **/coverage/
 **/.env
 !**/.env.example
@@ -21,6 +22,7 @@ dmypy.json
 .DS_Store
 .coverage
 **/*.coverage*
+**/*.tsbuildinfo
 **/*_db
 **/*cache
 **/*log
