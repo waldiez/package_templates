@@ -74,16 +74,16 @@ jobs:
           sudo apt update && sudo apt install -y xvfb libasound2t64 libgbm1 libgtk-3-0t64 libnss3 lcov > /dev/null 2>&1 || true
           xvfb-run -a bun run test
 
-      - name: Run tests in packages/vscode on windows-latest
+      - name: Run tests in python_and_ts on windows-latest
         if: matrix.os == 'windows-latest'
         run: |
-          cd packages/vscode
+          cd both
           bun install
           bun run test
 
-      - name: Run tests in packages/vscode on macos-latest
+      - name: Run tests in python_and_ts on macos-latest
         if: matrix.os == 'macos-latest'
         run: |
-          cd packages/vscode
+          cd both
           bun install
           bun run test
