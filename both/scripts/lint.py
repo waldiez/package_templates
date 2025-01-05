@@ -36,13 +36,16 @@ def ensure_dev_requirements() -> None:
     """Ensure the development requirements are installed."""
     if "--no-deps" in sys.argv:
         return
-    requirements_file = ROOT_DIR / "requirements" / "dev.txt"
+    dev_requirements_file = ROOT_DIR / "requirements" / "dev.txt"
+    test_requirements_file = ROOT_DIR / "requirements" / "test.txt"
     run_command(
         [
             "pip",
             "install",
             "-r",
-            str(requirements_file),
+            str(dev_requirements_file),
+            "-r",
+            str(test_requirements_file),
         ]
     )
 
