@@ -90,3 +90,7 @@ With ths repository as a parent project, the following requirements are expected
 > - `publish`: The `publish` script is optional. If present, it must publish the package to the registry.
 > - `docs`: The `docs` script is optional. If present, it must generate the documentation in the `site` directory.
 > - `image`: The `image` script is optional. If present, it must build a container image of the package.
+
+## License
+
+This project is licensed under the [Apache License, Version 2.0 (Apache-2.0)](https://github.com/waldiez/package_templates/blob/main/LICENSE).

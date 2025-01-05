@@ -96,5 +96,4 @@ make all
 prefer using he url instead of the file path.
 Why you ask? For example, the link in the PyPI page might not work.
 -->
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the [Apache License, Version 2.0 (Apache-2.0)](https://github.com/waldiez/package_templates/blob/main/python_only/LICENSE).
