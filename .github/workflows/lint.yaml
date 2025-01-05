@@ -1,0 +1,79 @@
+---
+name: Lint 🧹
+
+# yamllint disable rule:truthy
+on:
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  lint:
+    name: Run linters
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.11", "3.12"]
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: "recursive"
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Display Python version
+        run: python -c "import sys; print(sys.version)"
+
+      - name: Setup bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: patch package.json
+        run: |
+          bun install
+          bun run ci:patch
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install corepack and yarn
+        run: |
+          corepack enable
+          yarn set version stable
+
+      - name: Rollback package.json
+        run: |
+          bun run ci:rollback
+
+      - name: Lint root
+        run: |
+          python -m pip install -r requirements/dev.txt
+          python scripts/_py/lint.py --root
+          bun run lint:root
+
+      - name: Lint python_only package
+        run: |
+          cd python_only
+          pip install -r requirements/main.txt -r requirements/dev.txt -r requirements/test.txt
+          python scripts/lint.py
+
+      - name: Lint ts_olny package
+        run: |
+          cd ts_only
+          bun install
+          bun run lint
+
+      - name: Lint python_and_ts package
+        run: |
+          cd both
+          bun install
+          bun run lint
+          pip install --upgrade pip
+          pip install -r requirements/main.txt -r requirements/dev.txt -r requirements/test.txt
+          python scripts/lint.py

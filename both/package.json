@@ -1,0 +1,119 @@
+{
+    "name": "@my/package",
+    "description": "My package description.",
+    "version": "0.2.2",
+    "keywords": [
+        "my package",
+        "template"
+    ],
+    "type": "module",
+    "license": "Apache-2.0",
+    "private": true,
+    "homepage": "https://github.com/my_repo/my_package",
+    "bugs": {
+        "url": "https://github.com/my_repo/my_package/issues"
+    },
+    "contributors": [
+        {
+            "name": "First Last",
+            "email": "first.last@some.where"
+        },
+        {
+            "name": "First1 Last1",
+            "email": "f.last@some.one"
+        }
+    ],
+    "dependencies": {
+        "react": "^19.0.0",
+        "react-dom": "^19.0.0",
+        "react-icons": "^5.4.0"
+    },
+    "devDependencies": {
+        "@cspell/eslint-plugin": "^8.17.1",
+        "@eslint/compat": "^1.2.4",
+        "@eslint/js": "9.17.0",
+        "@lcov-viewer/cli": "^1.3.0",
+        "@stylistic/eslint-plugin": "^2.12.1",
+        "@testing-library/jest-dom": "^6.6.3",
+        "@testing-library/react": "^16.1.0",
+        "@trivago/prettier-plugin-sort-imports": "^5.2.1",
+        "@types/fs-extra": "^11.0.4",
+        "@types/jest": "^29.5.14",
+        "@types/node": "^22.10.5",
+        "@types/react": "^19.0.2",
+        "@types/react-dom": "^19.0.2",
+        "@types/tar-stream": "^3.1.3",
+        "@vitejs/plugin-react": "^4.3.4",
+        "@vitest/browser": "^2.1.8",
+        "@vitest/coverage-v8": "2.1.8",
+        "axios": "^1.7.9",
+        "dotenv": "^16.4.7",
+        "eslint": "^9.17.0",
+        "eslint-config-prettier": "^9.1.0",
+        "eslint-import-resolver-typescript": "^3.7.0",
+        "eslint-plugin-import": "^2.31.0",
+        "eslint-plugin-prettier": "^5.2.1",
+        "eslint-plugin-react-refresh": "^0.4.16",
+        "fs-extra": "^11.2.0",
+        "jsdom": "^25.0.1",
+        "pre-commit": "^1.2.2",
+        "prettier": "^3.4.2",
+        "rimraf": "^6.0.1",
+        "stylelint": "^16.12.0",
+        "stylelint-config-recommended": "^14.0.1",
+        "stylelint-config-standard": "^36.0.1",
+        "stylelint-prettier": "^5.0.2",
+        "terser": "^5.37.0",
+        "tsx": "^4.19.2",
+        "typedoc": "^0.27.6",
+        "typescript": "^5.7.2",
+        "typescript-eslint": "^8.19.0",
+        "vite": "^6.0.7",
+        "vitest": "^2.1.8"
+    },
+    "scripts": {
+        "dev": "vite -c vite.config.ts",
+        "check-types": "tsc --noEmit",
+        "build": "tsc -b && vite -c frontend/vite.config.ts build && bun after:build",
+        "after:build": "bun scripts/postBuild.ts",
+        "format": "bun prettier && bun stylelint && bun eslint",
+        "lint": "bun check-types && bun prettier:check && bun stylelint:check && bun eslint:check",
+        "forlint": "bun format && bun lint",
+        "eslint": "bun eslint:check --fix",
+        "eslint:check": "eslint --report-unused-disable-directives --max-warnings 0 --cache --config eslint.config.mjs \"frontend/**/*{.ts,.tsx}\"",
+        "prettier": "prettier \"**/*{.ts,.tsx,.css,.json,.md}\" --write --list-different",
+        "prettier:check": "prettier \"**/*{.ts,.tsx,.css,.json,.md}\" --check",
+        "stylelint": "bun stylelint:check --fix",
+        "stylelint:check": "stylelint --ignore-path .gitignore --cache \"**/*{.css,.scss}\"",
+        "clean:cache": "rimraf .eslintcache .stylelintcache",
+        "clean:tsbuild": "rimraf tsconfig.app.tsbuildinfo tsconfig.node.tsbuildinfo tsconfig.tsbuildinfo",
+        "clean:dist": "rimraf dist",
+        "clean:coverage": "rimraf coverage",
+        "clean": "bun clean:cache && bun clean:tsbuild && bun clean:dist && bun clean:coverage",
+        "python": "bun scripts/python.ts",
+        "before:test": "rimraf coverage/frontend",
+        "test": "bun test:components && bun test:e2e && bun after:test",
+        "after:test": "bun lcov:merge",
+        "lcov:merge": "bun python scripts/merge_lcov.py && bun scripts/lcov_html.ts",
+        "lcov:html": "lcov-viewer lcov -o coverage/html coverage/lcov.info",
+        "install:playwright": "bun python -m pip install playwright",
+        "before:e2e": "bun install:playwright && bun python -m playwright install chromium && bun python scripts/build.py",
+        "test:e2e": "bun before:e2e && bun python -m pytest e2e/test_e2e.py",
+        "test:components": "bun before:test && vitest run --config frontend/vite.config.ts --coverage",
+        "docs": "typedoc --out site --tsconfig tsconfig.json",
+        "archive": "bun pm pack --destination ./out",
+        "publish": "bun pm publish",
+        "image": "bun scripts/image.ts",
+        "version:get": "bun scripts/version.ts --get",
+        "version:set": "bun scripts/version.ts --set",
+        "all": "bun clean && bun format && bun lint && bun run test && bun run build && bun docs && bun archive"
+    },
+    "resolutions": {
+        "esbuild": "0.24.0"
+    },
+    "pre-commit": [
+        "format",
+        "lint"
+    ],
+    "packageManager": "bun@1.4.2"
+}

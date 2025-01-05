@@ -1,0 +1,8 @@
+**/node_modules
+**/.local
+**/*cache
+**/dist
+**/site
+**/out
+**/*.tsbuildinfo
+**/coverage
