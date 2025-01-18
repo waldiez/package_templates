@@ -68,7 +68,7 @@ export default defineConfig(({ command }) => {
             },
         },
         test: {
-            include: testsInclude,
+            include: [testsInclude],
             // support `describe`, `test` etc. globally,
             globals: true,
             // pool: 'vmThreads',
@@ -92,19 +92,21 @@ export default defineConfig(({ command }) => {
             browser: {
                 provider: "playwright", // or 'webdriverio'
                 enabled: isBrowserTest,
-                name: "chromium", // browser name is required
+                instances: [
+                    {
+                        browser: "chromium",
+                        context: {
+                            recordVideo: {
+                                dir: resolve(__dirname, "e2e", "videos"),
+                                size: viewport,
+                            },
+                            viewport,
+                            reducedMotion: "reduce",
+                        },
+                    },
+                ],
                 headless: true,
                 viewport,
-                providerOptions: {
-                    context: {
-                        recordVideo: {
-                            dir: resolve(__dirname, "e2e", "videos"),
-                            size: viewport,
-                        },
-                        viewport,
-                        reducedMotion: "reduce",
-                    },
-                },
             },
         },
     };
