@@ -1,6 +1,6 @@
 [project]
 name = "project_root"
-version = "0.3.6"
+version = "0.3.7"
 requires-python = ">=3.10,<3.13"
 dependencies = ['pip==24.3.1', "uv==0.5.14"]
 

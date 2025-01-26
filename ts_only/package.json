@@ -1,7 +1,7 @@
 {
     "name": "@my/package",
     "description": "My package description.",
-    "version": "0.3.6",
+    "version": "0.3.7",
     "keywords": [
         "my package",
         "template"
