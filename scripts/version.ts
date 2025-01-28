@@ -161,7 +161,7 @@ function bumpPy(newVersion: string) {
  * @param newVersion The new version number.
  * @throws {Error} If an error occurs.
  */
-function bumpRoot(newVersion: string) {
+function bumpRootPackageJson(newVersion: string) {
     try {
         const packageJsonPath = join(rootDir, "package.json");
         const packageJson = fs.readJsonSync(packageJsonPath);
@@ -171,6 +171,20 @@ function bumpRoot(newVersion: string) {
         console.error("Error:", (err as Error).message);
         process.exit(1);
     }
+}
+
+/**
+ * Bump the version number in the root python project.
+ */
+function bumpRootPyProject(newVersion: string) {
+    const rootPyProjectToml = resolve(rootDir, "pyproject.toml");
+    if (!fs.existsSync(rootPyProjectToml)) {
+        console.log("Skipping root python project...");
+        return;
+    }
+    const rootPyProject = fs.readFileSync(rootPyProjectToml, { encoding: "utf-8" });
+    const newRootPyProject = rootPyProject.replace(/version = "\d+\.\d+\.\d+"/, `version = "${newVersion}"`);
+    fs.writeFileSync(rootPyProjectToml, newRootPyProject, { encoding: "utf-8" });
 }
 
 /**
@@ -268,7 +282,8 @@ function main() {
     console.info(`\x1b[36mSetting version: ${newVersion}\n`);
     bumpTs(newVersion);
     bumpPy(newVersion);
-    bumpRoot(newVersion);
+    bumpRootPackageJson(newVersion);
+    bumpRootPyProject(newVersion);
 }
 
 main();
