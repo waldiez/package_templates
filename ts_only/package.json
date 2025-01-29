@@ -1,7 +1,7 @@
 {
     "name": "@my/package",
     "description": "My package description.",
-    "version": "0.3.9",
+    "version": "0.3.10",
     "keywords": [
         "my package",
         "template"
@@ -113,5 +113,5 @@
         "format",
         "lint"
     ],
-    "packageManager": "bun@1.2.0"
+    "packageManager": "bun@1.2.1"
 }
