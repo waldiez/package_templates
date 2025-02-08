@@ -2,6 +2,7 @@
 # Copyright (c) 2024 - 2025 Waldiez and contributors.
 """Build python packages."""
 
+# pylint: disable=duplicate-code,broad-except
 import sys
 from pathlib import Path
 

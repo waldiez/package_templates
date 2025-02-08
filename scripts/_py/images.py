@@ -6,6 +6,8 @@ In sub-projects that have either a
 scripts/image.py or scripts/image.ts file.
 """
 
+# pylint: disable=duplicate-code
+
 import sys
 from pathlib import Path
 

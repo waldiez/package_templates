@@ -2,6 +2,7 @@
 # Copyright (c) 2024 - 2025 Waldiez and contributors.
 """Generate docs in projects that have a mkdocs.yml file."""
 
+# pylint: disable=duplicate-code
 import sys
 from pathlib import Path
 

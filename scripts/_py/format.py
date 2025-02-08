@@ -16,6 +16,8 @@ run_ruff()
     Run ruff.
 """
 
+# pylint: disable=duplicate-code
+
 import sys
 from pathlib import Path
 

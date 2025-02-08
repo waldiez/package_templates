@@ -5,6 +5,8 @@
 import sys
 from pathlib import Path
 
+# pylint:disable=duplicate-code
+
 HAD_TO_MODIFY_SYS_PATH = False
 
 try:
