@@ -7,4 +7,4 @@ mkdocs-material==9.6.4
 mkdocs-minify-html-plugin==0.2.4
 mkdocs==1.6.1
 mkdocstrings-python==1.15.0
-mkdocstrings[crystal,python]==0.28.0
+mkdocstrings[crystal,python]==0.28.1
