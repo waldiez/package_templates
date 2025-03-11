@@ -113,5 +113,5 @@
         "format",
         "lint"
     ],
-    "packageManager": "bun@1.2.2"
+    "packageManager": "bun@1.2.5"
 }
