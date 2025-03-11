@@ -139,4 +139,4 @@ try {
 }
 Write-Host "Python Interpreter Path: $env:PYTHON_INTERPRETER_PATH"
 Write-Host "You can call 'bun requirements' to install the requirements"
-Write-Host "And 'uv sync --all-packages' to sync the packages (and check for conflicts)"
+Write-Host "And 'uv sync --all-extras' to sync the packages (and check for conflicts)"

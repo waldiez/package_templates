@@ -96,5 +96,5 @@ if ! "$PYTHON_EXEC" -m pip install --upgrade uv pip; then
     exit 1
 fi
 echo "Python Interpreter Path: $PYTHON_INTERPRETER_PATH"
-echo "You can call 'uv sync --all-packages' to sync the packages (and check for conflicts)"
+echo "You can call 'uv sync --all-extras' to sync the packages (and check for conflicts)"
 echo "You can call 'bun install && bun requirements' to install the requirements"
