@@ -4,7 +4,7 @@ version = "0.4.1"
 requires-python = ">=3.10,<3.13"
 dependencies = [
     'pip==25.0.1',
-    "uv==0.6.5",
+    "uv==0.6.10",
 ]
 
 [tool.uv.sources]
@@ -215,25 +215,27 @@ line-ending = 'lf'
 dev = [
     'autoflake==2.3.1',
     'bandit==1.8.3',
+    'bandit==1.8.3',
     'black==25.1.0',
+    'flake8==7.1.2',
     'flake8==7.1.2',
     'hatchling==1.27.0',
     'isort==6.0.1',
+    'isort==6.0.1',
     'mypy==1.15.0',
-    'pre-commit==4.1.0',
+    'pre-commit==4.2.0',
     'pydocstyle==6.3.0',
-    'pylint==3.3.5',
-    'pypiserver==2.3.2',
-    'python-dotenv==1.0.1',
-    'ruff==0.9.10',
+    'pylint==3.3.6',
+    'python-dotenv==1.1.0',
+    'ruff==0.11.2',
     'toml; python_version <= "3.10"',
-    'types-PyYAML==6.0.12.20241230',
+    'types-PyYAML==6.0.12.20250326',
     'types-toml== 0.10.8.20240310',
-    'yamllint==1.36.0',
+    'yamllint==1.37.0',
 ]
 test = [
     'pytest==8.3.5',
-    'pytest-asyncio==0.25.3',
+    'pytest-asyncio==0.26.0',
     'pytest-cov==6.0.0',
     'pytest-html==4.1.1',
     'pytest-sugar==1.0.0',

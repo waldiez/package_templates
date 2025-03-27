@@ -47,7 +47,7 @@ if [  ! -f "$PYTHON_INTERPRETER_PATH" ]; then
     # maybe overridden on windows (.\venv\Scripts\python.exe)?
     # change it back to unix path
     # if it ends Scripts\python.exe, use the default path
-    if echo "$PYTHON_INTERPRETER_PATH" | grep -q 'Scripts\\python.exe'; then
+    if echo "$PYTHON_INTERPRETER_PATH" | grep -q "Scripts\\python.exe"; then
         PYTHON_INTERPRETER_PATH="$DEFAULT_PATH"
         export PYTHON_INTERPRETER_PATH
         # replace if it is in the .env file
@@ -96,5 +96,5 @@ if ! "$PYTHON_EXEC" -m pip install --upgrade uv pip; then
     exit 1
 fi
 echo "Python Interpreter Path: $PYTHON_INTERPRETER_PATH"
-echo "You can call 'uv sync --all-extras' to sync the packages (and check for conflicts)"
-echo "You can call 'bun install && bun requirements' to install the requirements"
+echo "You can call 'bun requirements' to install the requirements"
+echo "And 'uv sync --all-packages' to sync the packages (and check for conflicts)"
