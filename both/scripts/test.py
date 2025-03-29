@@ -16,6 +16,23 @@ ROOT_DIR = Path(__file__).parent.parent
 os.environ["PYTHONUNBUFFERED"] = "1"
 
 
+def ensure_test_requirements() -> None:
+    """Ensure the test requirements are installed."""
+    requirements_file = ROOT_DIR / "requirements" / "test.txt"
+    subprocess.run(  # nosemgrep # nosec
+        [
+            sys.executable,
+            "-m",
+            "pip",
+            "install",
+            "-r",
+            str(requirements_file),
+        ],
+        check=True,
+        cwd=ROOT_DIR,
+    )
+
+
 def run_pytest() -> None:
     """Run pytest."""
     coverage_dir = ROOT_DIR / "coverage" / "backend"
@@ -69,6 +86,7 @@ def run_pytest() -> None:
 
 def main() -> None:
     """Run the tests."""
+    ensure_test_requirements()
     run_pytest()
 
 

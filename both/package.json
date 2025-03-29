@@ -92,7 +92,7 @@
         "clean:coverage": "rimraf coverage",
         "clean": "bun clean:cache && bun clean:tsbuild && bun clean:dist && bun clean:coverage",
         "python": "bun scripts/python.ts",
-        "before:test": "rimraf coverage/frontend",
+        "before:test": "rimraf coverage/frontend && bun python -m pip install -r requirements/test.txt",
         "test": "bun test:components && bun test:e2e && bun after:test",
         "after:test": "bun lcov:merge",
         "lcov:merge": "bun python scripts/merge_lcov.py && bun scripts/lcov_html.ts",
