@@ -1,7 +1,7 @@
 {
     "name": "@my/package",
     "description": "My package description.",
-    "version": "0.4.1",
+    "version": "0.4.2",
     "keywords": [
         "my package",
         "template"
@@ -96,7 +96,7 @@
         "after:test": "bun scripts/video.ts",
         "test:snapshots": "bun before:test && vitest run --config vite.config.ts --browser.enabled --browser.headless --update",
         "test:e2e": "bun before:test && vitest run --config vite.config.ts --browser.enabled --browser.headless && bun after:test",
-        "test:components": "bun before:test && vitest run --config vite.config.ts --coverage",
+        "test:components": "bun before:test && bun vitest run --config vite.config.ts --coverage",
         "test": "bun test:e2e && bun test:components",
         "docs": "typedoc --out site --tsconfig tsconfig.json",
         "archive": "bun pm pack --destination ./out",
