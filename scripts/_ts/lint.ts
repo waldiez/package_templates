@@ -4,7 +4,7 @@ import fs from "fs-extra";
 
 import { runEsLint, runPrettier, packageJson, rootDir, runCommandInDir, getPackageManager } from "./_lib";
 
-function lintThisDir(): void {
+const lintThisDir = (): void => {
     try {
         runPrettier(__dirname, false);
         runEsLint(path.join(rootDir), false, true);
@@ -14,7 +14,7 @@ function lintThisDir(): void {
     }
 }
 
-function main(): void {
+const main = (): void => {
     lintThisDir();
     if (process.argv.includes("--root")) {
         return;

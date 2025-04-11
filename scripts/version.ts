@@ -19,7 +19,7 @@ import { execSync } from "child_process";
  * @param exitCode The exit code.
  * @returns {void}
  */
-function showHelp(exitCode: number = 0): void {
+const showHelp = (exitCode: number = 0): void => {
     const manger = getPackageManager(rootDir);
     console.info(`\x1b[36mUsage: ${manger} version <args>\n`);
     console.info("\x1b[36mExamples: \n");
@@ -30,13 +30,13 @@ function showHelp(exitCode: number = 0): void {
     console.info(`${manger} version --get\n`);
     console.info(`${manger} version --check\n`);
     process.exit(exitCode);
-}
+};
 
 /**
  * Get the index of the version part to bump.
  * @returns The index of the version part to bump.
  */
-function getVersionIndexToBump(): number {
+const getVersionIndexToBump = (): number => {
     const arg = process.argv.slice(2)[0];
     if (arg === "--major") {
         return 0;
@@ -49,23 +49,23 @@ function getVersionIndexToBump(): number {
     }
     showHelp(1);
     return -1;
-}
+};
 
 /**
  * Show the current version.
  * @returns {void}
  */
-function showVersion(): void {
+const showVersion = (): void => {
     console.info(`\x1b[36mVersion: ${packageJson.version}\n`);
     process.exit(0);
-}
+};
 
 /**
  * Get the new version string.
  * @returns The new version string.
  * @throws {Error} If an error occurs.
  */
-function getNextVersion(): string {
+const getNextVersion = (): string => {
     try {
         const index = getVersionIndexToBump();
         const version = fs.readJsonSync(resolve(rootDir, "package.json"), {
@@ -81,13 +81,13 @@ function getNextVersion(): string {
         console.error("Error:", (err as Error).message);
         process.exit(1);
     }
-}
+};
 
 /**
  * Get the new version number.
  * @returns The new version number.
  */
-function getNewVersion(): string {
+const getNewVersion = (): string => {
     if (process.argv.slice(2)[0] === "--set") {
         if (process.argv.length < 4) {
             console.error("Error: Missing version number");
@@ -101,7 +101,7 @@ function getNewVersion(): string {
         return newVersion;
     }
     return getNextVersion();
-}
+};
 
 /**
  * Bump the version number in package.json and in all sub-packages.
@@ -109,7 +109,7 @@ function getNewVersion(): string {
  * @throws {Error} If an error occurs.
  * @returns {void}
  */
-function bumpTs(newVersion: string): void {
+const bumpTs = (newVersion: string): void => {
     try {
         for (const tsProject of packageJson.packages.ts) {
             const packageJsonPath = resolve(rootDir, tsProject, "package.json");
@@ -127,7 +127,7 @@ function bumpTs(newVersion: string): void {
         console.error("Error:", (err as Error).message);
         process.exit(1);
     }
-}
+};
 
 /**
  * Bump the version number in python projects.
@@ -138,7 +138,7 @@ function bumpTs(newVersion: string): void {
  * @param newVersion The new version number.
  * @throws {Error} If an error occurs.
  */
-function bumpPy(newVersion: string) {
+const bumpPy = (newVersion: string) => {
     for (const pyProject of packageJson.packages.py) {
         const versionFile = resolve(rootDir, pyProject, "scripts", "version.py");
         const devVersionFile = resolve(rootDir, pyProject, "scripts", "dev", "version.py");
@@ -154,14 +154,14 @@ function bumpPy(newVersion: string) {
             cwd: rootDir,
         });
     }
-}
+};
 
 /**
  * Bump the version number in the root package.json.
  * @param newVersion The new version number.
  * @throws {Error} If an error occurs.
  */
-function bumpRootPackageJson(newVersion: string) {
+const bumpRootPackageJson = (newVersion: string) => {
     try {
         const packageJsonPath = join(rootDir, "package.json");
         const packageJson = fs.readJsonSync(packageJsonPath);
@@ -171,12 +171,12 @@ function bumpRootPackageJson(newVersion: string) {
         console.error("Error:", (err as Error).message);
         process.exit(1);
     }
-}
+};
 
 /**
  * Bump the version number in the root python project.
  */
-function bumpRootPyProject(newVersion: string) {
+const bumpRootPyProject = (newVersion: string) => {
     const rootPyProjectToml = resolve(rootDir, "pyproject.toml");
     if (!fs.existsSync(rootPyProjectToml)) {
         console.log("Skipping root python project...");
@@ -185,14 +185,14 @@ function bumpRootPyProject(newVersion: string) {
     const rootPyProject = fs.readFileSync(rootPyProjectToml, { encoding: "utf-8" });
     const newRootPyProject = rootPyProject.replace(/version = "\d+\.\d+\.\d+"/, `version = "${newVersion}"`);
     fs.writeFileSync(rootPyProjectToml, newRootPyProject, { encoding: "utf-8" });
-}
+};
 
 /**
  * Check the version number in all projects.
  * @returns {void}
  * @throws {Error} If an error occurs.
  */
-function checkTsVersions(): void {
+const checkTsVersions = (): void => {
     const version = packageJson.version;
     const tsProjects = packageJson.packages.ts;
     for (const tsProject of tsProjects) {
@@ -209,14 +209,14 @@ function checkTsVersions(): void {
             }
         }
     }
-}
+};
 
 /**
  * Check the version number in all python projects.
  * @returns {void}
  * @throws {Error} If an error occurs.
  */
-function checkPyVersions(): void {
+const checkPyVersions = (): void => {
     const version = packageJson.version;
     const pyProjects = packageJson.packages.py;
     for (const pyProject of pyProjects) {
@@ -235,26 +235,26 @@ function checkPyVersions(): void {
             process.exit(1);
         }
     }
-}
+};
 
 /**
  * Check the version number in all projects.
  * @returns {void}
  * @throws {Error} If an error occurs.
  */
-function checkVersions(): void {
+const checkVersions = (): void => {
     checkTsVersions();
     checkPyVersions();
     console.info("All versions match\n");
     console.info(`\x1b[36mVersion: ${packageJson.version}\n`);
-}
+};
 
 /**
  * Check the command line arguments.
  * If no write action is requested, we exit.
  * @returns {void}
  */
-function checkArgs(): void {
+const checkArgs = (): void => {
     if (process.argv.length < 3) {
         showHelp();
         return;
@@ -267,12 +267,12 @@ function checkArgs(): void {
         showVersion();
         return;
     }
-}
+};
 
 /**
  * Main function.
  */
-function main() {
+const main = (): void => {
     checkArgs();
     if (process.argv.slice(2)[0] === "--check") {
         checkVersions();
@@ -284,6 +284,6 @@ function main() {
     bumpPy(newVersion);
     bumpRootPackageJson(newVersion);
     bumpRootPyProject(newVersion);
-}
+};
 
 main();

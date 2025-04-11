@@ -5,7 +5,7 @@ import fs from "fs-extra";
 
 import { runEsLint, runPrettier, packageJson, rootDir, runCommandInDir, getPackageManager } from "./_lib";
 
-function formatThisDir(): void {
+const formatThisDir = (): void => {
     try {
         runPrettier(__dirname, true);
         runEsLint(rootDir, true, true);
@@ -13,9 +13,9 @@ function formatThisDir(): void {
         console.error("Error:", (err as Error).message);
         process.exit(1);
     }
-}
+};
 
-function main(): void {
+const main = (): void => {
     formatThisDir();
     for (const project of packageJson.packages.ts) {
         const projectDir = path.join(rootDir, project);
@@ -28,6 +28,6 @@ function main(): void {
             console.log(`Skipping ${projectDir} as it does not have a package.json file.`);
         }
     }
-}
+};
 
 main();

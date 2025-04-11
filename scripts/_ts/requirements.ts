@@ -9,7 +9,7 @@ import { packageJson, rootDir, getPackageManager } from "./_lib";
 /**
  * Install the requirements for each ts sub-project.
  */
-function main() {
+const main = () => {
     for (const project of packageJson.packages.ts) {
         const projectDir = path.join(rootDir, project);
         const packageJson = path.join(projectDir, "package.json");
@@ -24,6 +24,6 @@ function main() {
         }
         execSync(`${packageManager} install`, { cwd: projectDir, stdio: "inherit" });
     }
-}
+};
 
 main();

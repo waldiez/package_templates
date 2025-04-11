@@ -4,7 +4,7 @@ import fs from "fs-extra";
 
 import { packageJson, rootDir, runCommandInDir, getPackageManager } from "./_lib";
 
-function runTests() {
+const runTests = () => {
     for (const project of packageJson.packages.ts) {
         const projectDir = path.join(rootDir, project);
         const packageJsonPath = path.join(projectDir, "package.json");

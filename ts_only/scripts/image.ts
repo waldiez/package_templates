@@ -20,15 +20,16 @@ if (process.argv.includes("--dev")) {
     DEFAULT_CONTAINER_FILE = "Containerfile.dev";
 }
 
-function isCommandAvailable(command: string): boolean {
+const isCommandAvailable = (command: string): boolean => {
     try {
         execSync(`${command} --version`, { stdio: "ignore" });
         return true;
     } catch {
         return false;
     }
-}
-function getContainerCmd(): string {
+};
+
+const getContainerCmd = (): string => {
     const fromEnv = process.env.CONTAINER_COMMAND || "";
     if (["docker", "podman"].includes(fromEnv)) {
         return fromEnv;
@@ -37,18 +38,18 @@ function getContainerCmd(): string {
         return "podman";
     }
     return "docker";
-}
+};
 
-function runCommand(command: string[]): void {
+const runCommand = (command: string[]): void => {
     console.log(`Running command: \n${command.join(" ")}\n`);
     execSync(command.join(" "), {
         stdio: "inherit",
         cwd: ROOT_DIR,
         env: process.env,
     });
-}
+};
 
-function buildImage(
+const buildImage = (
     containerFile: string,
     imageName: string,
     imageTag: string,
@@ -56,7 +57,7 @@ function buildImage(
     containerCommand: string,
     noCache: boolean,
     buildArgs: string[],
-): void {
+): void => {
     const cmd = [
         containerCommand,
         "build",
@@ -78,23 +79,24 @@ function buildImage(
     }
     cmd.push(".");
     runCommand(cmd);
-}
+};
 
-function pushImage(
+const pushImage = (
     imageName: string,
     imageTag: string,
     imagePlatform: string,
     containerCommand: string,
-): void {
+): void => {
     console.log("Let's say that we:");
     runCommand([containerCommand, "push", "--platform", imagePlatform, `${imageName}:${imageTag}`]);
     console.log(`Pushed image: ${imageName}:${imageTag}`);
-}
-function isWindowsPlatform(): boolean {
-    return process.platform === "win32";
-}
+};
 
-function getPlatformArch(): string {
+const isWindowsPlatform = (): boolean => {
+    return process.platform === "win32";
+};
+
+const getPlatformArch = (): string => {
     let myArch: string = process.arch;
     if (myArch === "x64") {
         myArch = "amd64";
@@ -102,9 +104,9 @@ function getPlatformArch(): string {
         myArch = "arm64";
     }
     return myArch;
-}
+};
 
-function setupQemu(containerCommand: string): void {
+const setupQemu = (containerCommand: string): void => {
     try {
         runCommand([
             containerCommand,
@@ -119,9 +121,9 @@ function setupQemu(containerCommand: string): void {
     } catch (error) {
         console.warn("Error setting up multi-platform support:", error);
     }
-}
+};
 
-function checkOtherPlatform(containerCommand: string, platformArg: string): boolean {
+const checkOtherPlatform = (containerCommand: string, platformArg: string): boolean => {
     const isWindows = isWindowsPlatform();
     let isOtherPlatform = isWindows;
 
@@ -137,7 +139,7 @@ function checkOtherPlatform(containerCommand: string, platformArg: string): bool
     }
 
     return isOtherPlatform;
-}
+};
 
 const program = new Command();
 program
@@ -152,7 +154,7 @@ program
     .option("--container-file <file>", "The container file to use.", DEFAULT_CONTAINER_FILE)
     .option("--dev", "Use the development container file.", false);
 
-function main(): void {
+const main = (): void => {
     const options = program.parse(process.argv).opts();
 
     const { imageName, imageTag, platform, containerCommand, buildArgs, noCache, push, containerFile } =
@@ -171,7 +173,7 @@ function main(): void {
             throw error;
         }
     }
-}
+};
 
 if (require.main === module) {
     main();
