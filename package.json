@@ -1,6 +1,6 @@
 {
     "private": true,
-    "version": "0.4.2",
+    "version": "0.4.3",
     "devDependencies": {
         "@cspell/eslint-plugin": "^8.18.1",
         "@eslint/js": "^9.24.0",
