@@ -28,7 +28,7 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduc
 >
 > **Required files**
 >
-> - `package.json`: The package.json file must be present in the root of the repository. It must contain a `scripts` object and should also define the `packageManager` field (e.g. `"packageManager": "bun@1.2.7"`, or `"packageManager": "yarn@4.7.0"`)
+> - `package.json`: The package.json file must be present in the root of the repository. It must contain a `scripts` object and should also define the `packageManager` field (e.g. `"packageManager": "bun@1.2.9"`, or `"packageManager": "yarn@4.9.1"`)
 >
 > **Required scripts**
 >
