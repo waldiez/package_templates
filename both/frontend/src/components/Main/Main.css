@@ -28,7 +28,7 @@
     background-color: var(--primary-color);
     color: var(--primary-alt-color);
     border-color: transparent;
-    box-shadow: 0 0 10px rgba(0 0 0 / 10%);
+    box-shadow: 0 0 10px rgb(0 0 0 / 10%);
 }
 
 /* @-moz-keyframes spin {
@@ -83,7 +83,7 @@
     background-color: var(--primary-color);
     color: var(--primary-alt-color);
     border-color: transparent;
-    box-shadow: 0 0 10px rgba(0 0 0 / 10%);
+    box-shadow: 0 0 10px rgb(0 0 0 / 10%);
     font-size: larger;
 }
 
@@ -97,7 +97,7 @@
     background-color: var(--primary-color);
     color: var(--primary-alt-color);
     border-color: transparent;
-    box-shadow: 0 0 10px rgba(0 0 0 / 10%);
+    box-shadow: 0 0 10px rgb(0 0 0 / 10%);
     cursor: pointer;
 }
 
