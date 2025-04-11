@@ -12,7 +12,7 @@ const lintThisDir = (): void => {
         console.error("Error:", (err as Error).message);
         process.exit(1);
     }
-}
+};
 
 const main = (): void => {
     lintThisDir();
@@ -28,6 +28,6 @@ const main = (): void => {
             runCommandInDir(projectDir, packageManager, ["run", "lint"]);
         }
     }
-}
+};
 
 main();

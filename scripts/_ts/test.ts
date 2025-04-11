@@ -15,6 +15,6 @@ const runTests = () => {
             console.log(`No package.json in ${projectDir} skipping ...`);
         }
     }
-}
+};
 
 runTests();
